@@ -24,18 +24,32 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
+            List<Caliber> listOfCalibers;
+            using (var db = new srsDBEntities())
+            {
+                listOfCalibers = db.Caliber.ToList();
+            }
+            lstCalibreListBox.ItemsSource = listOfCalibers;
         }
 
 
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-            using(var db = new srsDBEntities())
+            using (var db = new srsDBEntities())
             {
-                db.User.Add(new User()
+                User newUser = new User()
                 {
                     FirstName = firstNameBox.Text,
                     LastName = lastNameBox.Text,
-                });
+                };
+
+                db.User.Add(newUser);
+
+                foreach(Caliber caliber in lstCalibreListBox.SelectedItems)
+                {
+                    newUser.Caliber.Add(db.Caliber.Where(o => o.Name == caliber.Name).FirstOrDefault());
+                }
+        
                 db.SaveChanges();
             }
         }
