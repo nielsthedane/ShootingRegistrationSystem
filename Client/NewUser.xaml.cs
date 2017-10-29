@@ -51,6 +51,11 @@ namespace Client
                 db.User.Add(newUser);
                 db.SaveChanges();
             }
+
+            firstNameBox.Clear();
+            lastNameBox.Clear();
+
+            MessageBox.Show("Brugeren er blevet tilføjet!");
         }
     }
 }
