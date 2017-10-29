@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="srsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Caliber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shooting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShootingType" Type="int" Nullable="false" />
+          <Property Name="Shoots" Type="int" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="PaymentType" Type="int" Nullable="false" />
+          <Property Name="Caliber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShootingTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCalibers">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="CaliberId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CaliberId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserShootings">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ShootingId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ShootingId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Shooting_Caliber">
+          <End Role="Caliber" Type="Self.Caliber" Multiplicity="1" />
+          <End Role="Shooting" Type="Self.Shooting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caliber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooting">
+              <PropertyRef Name="Caliber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooting_PaymentTypes">
+          <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="1" />
+          <End Role="Shooting" Type="Self.Shooting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooting">
+              <PropertyRef Name="PaymentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooting_ShootingTypes">
+          <End Role="ShootingTypes" Type="Self.ShootingTypes" Multiplicity="1" />
+          <End Role="Shooting" Type="Self.Shooting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShootingTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooting">
+              <PropertyRef Name="ShootingType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCalibers_Caliber">
+          <End Role="Caliber" Type="Self.Caliber" Multiplicity="1" />
+          <End Role="UserCalibers" Type="Self.UserCalibers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caliber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCalibers">
+              <PropertyRef Name="CaliberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCalibers_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserCalibers" Type="Self.UserCalibers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCalibers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserShootings_Shooting">
+          <End Role="Shooting" Type="Self.Shooting" Multiplicity="1" />
+          <End Role="UserShootings" Type="Self.UserShootings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shooting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserShootings">
+              <PropertyRef Name="ShootingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserShootings_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserShootings" Type="Self.UserShootings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserShootings">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="srsDBModelStoreContainer">
+          <EntitySet Name="Caliber" EntityType="Self.Caliber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shooting" EntityType="Self.Shooting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShootingTypes" EntityType="Self.ShootingTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserCalibers" EntityType="Self.UserCalibers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserShootings" EntityType="Self.UserShootings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Shooting_Caliber" Association="Self.FK_Shooting_Caliber">
+            <End Role="Caliber" EntitySet="Caliber" />
+            <End Role="Shooting" EntitySet="Shooting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooting_PaymentTypes" Association="Self.FK_Shooting_PaymentTypes">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="Shooting" EntitySet="Shooting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooting_ShootingTypes" Association="Self.FK_Shooting_ShootingTypes">
+            <End Role="ShootingTypes" EntitySet="ShootingTypes" />
+            <End Role="Shooting" EntitySet="Shooting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCalibers_Caliber" Association="Self.FK_UserCalibers_Caliber">
+            <End Role="Caliber" EntitySet="Caliber" />
+            <End Role="UserCalibers" EntitySet="UserCalibers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCalibers_User" Association="Self.FK_UserCalibers_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserCalibers" EntitySet="UserCalibers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserShootings_Shooting" Association="Self.FK_UserShootings_Shooting">
+            <End Role="Shooting" EntitySet="Shooting" />
+            <End Role="UserShootings" EntitySet="UserShootings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserShootings_User" Association="Self.FK_UserShootings_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserShootings" EntitySet="UserShootings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="srsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Caliber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Shooting" Relationship="Self.FK_Shooting_Caliber" FromRole="Caliber" ToRole="Shooting" />
+          <NavigationProperty Name="User" Relationship="Self.UserCalibers" FromRole="Caliber" ToRole="User" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Shooting" Relationship="Self.FK_Shooting_PaymentTypes" FromRole="PaymentTypes" ToRole="Shooting" />
+        </EntityType>
+        <EntityType Name="Shooting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShootingType" Type="Int32" Nullable="false" />
+          <Property Name="Shoots" Type="Int32" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentType" Type="Int32" Nullable="false" />
+          <Property Name="Caliber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Caliber1" Relationship="Self.FK_Shooting_Caliber" FromRole="Shooting" ToRole="Caliber" />
+          <NavigationProperty Name="PaymentTypes" Relationship="Self.FK_Shooting_PaymentTypes" FromRole="Shooting" ToRole="PaymentTypes" />
+          <NavigationProperty Name="ShootingTypes" Relationship="Self.FK_Shooting_ShootingTypes" FromRole="Shooting" ToRole="ShootingTypes" />
+          <NavigationProperty Name="User" Relationship="Self.UserShootings" FromRole="Shooting" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ShootingTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Shooting" Relationship="Self.FK_Shooting_ShootingTypes" FromRole="ShootingTypes" ToRole="Shooting" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Caliber" Relationship="Self.UserCalibers" FromRole="User" ToRole="Caliber" />
+          <NavigationProperty Name="Shooting" Relationship="Self.UserShootings" FromRole="User" ToRole="Shooting" />
+        </EntityType>
+        <Association Name="FK_Shooting_Caliber">
+          <End Role="Caliber" Type="Self.Caliber" Multiplicity="1" />
+          <End Role="Shooting" Type="Self.Shooting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caliber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooting">
+              <PropertyRef Name="Caliber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooting_PaymentTypes">
+          <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="1" />
+          <End Role="Shooting" Type="Self.Shooting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooting">
+              <PropertyRef Name="PaymentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooting_ShootingTypes">
+          <End Role="ShootingTypes" Type="Self.ShootingTypes" Multiplicity="1" />
+          <End Role="Shooting" Type="Self.Shooting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShootingTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooting">
+              <PropertyRef Name="ShootingType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserCalibers">
+          <End Role="Caliber" Type="Self.Caliber" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <Association Name="UserShootings">
+          <End Role="Shooting" Type="Self.Shooting" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="srsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Caliber" EntityType="Self.Caliber" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" />
+          <EntitySet Name="Shooting" EntityType="Self.Shooting" />
+          <EntitySet Name="ShootingTypes" EntityType="Self.ShootingTypes" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Shooting_Caliber" Association="Self.FK_Shooting_Caliber">
+            <End Role="Caliber" EntitySet="Caliber" />
+            <End Role="Shooting" EntitySet="Shooting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooting_PaymentTypes" Association="Self.FK_Shooting_PaymentTypes">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="Shooting" EntitySet="Shooting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooting_ShootingTypes" Association="Self.FK_Shooting_ShootingTypes">
+            <End Role="ShootingTypes" EntitySet="ShootingTypes" />
+            <End Role="Shooting" EntitySet="Shooting" />
+          </AssociationSet>
+          <AssociationSet Name="UserCalibers" Association="Self.UserCalibers">
+            <End Role="Caliber" EntitySet="Caliber" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="UserShootings" Association="Self.UserShootings">
+            <End Role="Shooting" EntitySet="Shooting" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="srsDBModelStoreContainer" CdmEntityContainer="srsDBEntities">
+          <EntitySetMapping Name="Caliber">
+            <EntityTypeMapping TypeName="srsDBModel.Caliber">
+              <MappingFragment StoreEntitySet="Caliber">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="srsDBModel.PaymentTypes">
+              <MappingFragment StoreEntitySet="PaymentTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shooting">
+            <EntityTypeMapping TypeName="srsDBModel.Shooting">
+              <MappingFragment StoreEntitySet="Shooting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ShootingType" ColumnName="ShootingType" />
+                <ScalarProperty Name="Shoots" ColumnName="Shoots" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="Caliber" ColumnName="Caliber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShootingTypes">
+            <EntityTypeMapping TypeName="srsDBModel.ShootingTypes">
+              <MappingFragment StoreEntitySet="ShootingTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="srsDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserCalibers" TypeName="srsDBModel.UserCalibers" StoreEntitySet="UserCalibers">
+            <EndProperty Name="Caliber">
+              <ScalarProperty Name="Id" ColumnName="CaliberId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserShootings" TypeName="srsDBModel.UserShootings" StoreEntitySet="UserShootings">
+            <EndProperty Name="Shooting">
+              <ScalarProperty Name="Id" ColumnName="ShootingId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
