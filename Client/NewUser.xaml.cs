@@ -43,13 +43,12 @@ namespace Client
                     LastName = lastNameBox.Text,
                 };
 
-                db.User.Add(newUser);
-
-                foreach(Caliber caliber in lstCalibreListBox.SelectedItems)
+                foreach (Caliber caliber in lstCalibreListBox.SelectedItems)
                 {
                     newUser.Caliber.Add(db.Caliber.Where(o => o.Name == caliber.Name).FirstOrDefault());
                 }
-        
+
+                db.User.Add(newUser);
                 db.SaveChanges();
             }
         }
