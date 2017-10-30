@@ -1,0 +1,29 @@
+﻿<Window x:Name="Srs" x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="600">
+    <Grid>
+        <ComboBox x:Name="cboPaymentType" HorizontalAlignment="Left" Margin="19,184,0,0" VerticalAlignment="Top" Width="150"/>
+        <ComboBox x:Name="cboShootingType" HorizontalAlignment="Left" Margin="19,120,0,0" VerticalAlignment="Top" Width="150"/>
+        <ComboBox x:Name="cboUser" HorizontalAlignment="Left" Margin="19,56,0,0" VerticalAlignment="Top" Width="150"/>
+        <ComboBox x:Name="cboCaliber" HorizontalAlignment="Left" Margin="19,248,0,0" VerticalAlignment="Top" Width="150"/>
+        <Label Content="Bruger:" HorizontalAlignment="Left" Margin="36,30,0,0" VerticalAlignment="Top"/>
+        <Label Content="Skydning:" HorizontalAlignment="Left" Margin="36,89,0,0" VerticalAlignment="Top"/>
+        <Label Content="Betalings type:" HorizontalAlignment="Left" Margin="29,153,0,0" VerticalAlignment="Top"/>
+        <Label Content="Kaliber" HorizontalAlignment="Left" Margin="36,217,0,0" VerticalAlignment="Top"/>
+        <Button Content="Opret skydning" HorizontalAlignment="Left" Margin="29,288,0,0" VerticalAlignment="Top" Width="136" Click="addShootingButton_click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF9E9E9E" Offset="0.003"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <ListBox x:Name="lstShootings" HorizontalAlignment="Left" Height="264" Margin="195,56,0,0" VerticalAlignment="Top" Width="380" Background="#FFF1F1F1"/>
+        <Label Content="Igangværende skydninger:" HorizontalAlignment="Left" Margin="195,30,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
