@@ -40,9 +40,10 @@ namespace Client
             cboUser.ItemsSource = listOfUsers;
             cboPaymentType.ItemsSource = listOfPaymentTypes;
             cboShootingType.ItemsSource = listOfShootingTypes;
+            populateShootingListBox();
         }
 
-        public void addShootingButton_click(object sender, RoutedEventArgs e)
+        private void addShootingButton_click(object sender, RoutedEventArgs e)
         {
             User selectedUser = (User)cboUser.SelectedItem;
             ShootingTypes selectedsShootingType = (ShootingTypes)cboShootingType.SelectedItem;
@@ -65,7 +66,32 @@ namespace Client
 
                 db.SaveChanges();
             }
+            populateShootingListBox();
         }
 
+        private void lstShootings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void populateShootingListBox()
+        {
+            lstShootings.ItemsSource = getAllShootings();
+        }
+
+        private IEnumerable<Shooting> getAllShootings()
+        {
+            using (var db = new srsDBEntities())
+            {
+                return db.Shooting.ToList();
+            }
+           
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NewUser newUser = new NewUser();
+            newUser.Show();
+        }
     }
 }

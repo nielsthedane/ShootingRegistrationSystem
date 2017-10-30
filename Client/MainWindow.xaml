@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600">
+        Title="MainWindow" Height="400" Width="700
+        ">
     <Grid>
         <ComboBox x:Name="cboPaymentType" HorizontalAlignment="Left" Margin="19,184,0,0" VerticalAlignment="Top" Width="150"/>
         <ComboBox x:Name="cboShootingType" HorizontalAlignment="Left" Margin="19,120,0,0" VerticalAlignment="Top" Width="150"/>
@@ -23,7 +24,15 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListBox x:Name="lstShootings" HorizontalAlignment="Left" Height="264" Margin="195,56,0,0" VerticalAlignment="Top" Width="380" Background="#FFF1F1F1"/>
+        <ListBox x:Name="lstShootings" HorizontalAlignment="Left" Height="303" Margin="195,56,0,0" VerticalAlignment="Top" Width="487" Background="#FFF1F1F1" SelectionChanged="lstShootings_SelectionChanged"/>
         <Label Content="Igangværende skydninger:" HorizontalAlignment="Left" Margin="195,30,0,0" VerticalAlignment="Top"/>
+        <Button Content="Opret bruger" HorizontalAlignment="Left" Margin="29,5,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click" Height="25">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFCFCFCF" Offset="0.007"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>
