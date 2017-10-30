@@ -29,6 +29,7 @@
           <Property Name="CreationDate" Type="datetime" Nullable="false" />
           <Property Name="PaymentType" Type="int" Nullable="false" />
           <Property Name="Caliber" Type="int" Nullable="false" />
+          <Property Name="isDone" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ShootingTypes">
           <Key>
@@ -218,6 +219,7 @@
           <NavigationProperty Name="PaymentTypes" Relationship="Self.FK_Shooting_PaymentTypes" FromRole="Shooting" ToRole="PaymentTypes" />
           <NavigationProperty Name="ShootingTypes" Relationship="Self.FK_Shooting_ShootingTypes" FromRole="Shooting" ToRole="ShootingTypes" />
           <NavigationProperty Name="User" Relationship="Self.UserShootings" FromRole="Shooting" ToRole="User" />
+          <Property Name="isDone" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ShootingTypes">
           <Key>
@@ -334,6 +336,7 @@
           <EntitySetMapping Name="Shooting">
             <EntityTypeMapping TypeName="srsDBModel.Shooting">
               <MappingFragment StoreEntitySet="Shooting">
+                <ScalarProperty Name="isDone" ColumnName="isDone" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ShootingType" ColumnName="ShootingType" />
                 <ScalarProperty Name="Shoots" ColumnName="Shoots" />

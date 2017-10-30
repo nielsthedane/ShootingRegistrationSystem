@@ -58,9 +58,10 @@ namespace Client
                     ShootingType = selectedsShootingType.Id,
                     PaymentType = selectedPaymentType.Id,
                     Caliber = selectedCaliber.Id,
+                    isDone = false,
+                    
 
                 };
-
                 User user = db.User.Where(i => i.Id == selectedUser.Id).FirstOrDefault();
                 user.Shooting.Add(newShooting);
 
@@ -76,7 +77,11 @@ namespace Client
 
         private void populateShootingListBox()
         {
-            lstShootings.ItemsSource = getAllShootings();
+            if (getAllShootings() != null)
+            {
+                lstShootings.ItemsSource = getAllShootings();
+            }
+
         }
 
         private IEnumerable<Shooting> getAllShootings()
@@ -85,7 +90,7 @@ namespace Client
             {
                 return db.Shooting.ToList();
             }
-           
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

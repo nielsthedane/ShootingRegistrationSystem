@@ -27,27 +27,32 @@ namespace ShootingRegistrationSystem
         public System.DateTime CreationDate { get; set; }
         public int PaymentType { get; set; }
         public int Caliber { get; set; }
+        public bool isDone { get; set; }
 
         public virtual Caliber Caliber1 { get; set; }
         public virtual PaymentTypes PaymentTypes { get; set; }
         public virtual ShootingTypes ShootingTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> User { get; set; }
-
         public override string ToString()
         {
             User user = new User();
             Shooting shooting = new Shooting();
             ShootingTypes shootingType = new ShootingTypes();
+            Boolean isDone;
 
             using (var db = new srsDBEntities())
             {
                 shooting = db.Shooting.Where(i => i.Id == this.Id).FirstOrDefault();
+                shooting.User.First();
                 int userId = shooting.User.First().Id;
                 user = db.User.Where(i => i.Id == userId).FirstOrDefault();
+
                 shootingType = db.ShootingTypes.Where(k => k.Id == shooting.ShootingType).FirstOrDefault();
+                isDone = !shooting.isDone;
+
             }
-            return "Navn: " + user.FirstName + "  " + user.LastName + " Skydning: " + shootingType.Name + " Startet: " + CreationDate;
+            return "Navn: " + user.FirstName + "  " + user.LastName + " Skydning: " + shootingType.Name + " Startet: " + CreationDate + " Aktiv: " + isDone;
         }
     }
 }
