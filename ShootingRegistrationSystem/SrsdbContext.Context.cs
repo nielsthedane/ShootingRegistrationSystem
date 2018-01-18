@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ShootingRegistrationSystem
+namespace DAL
 {
     using System;
     using System.Data.Entity;

@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ShootingRegistrationSystem;
 
 namespace Client
 {
@@ -24,38 +23,38 @@ namespace Client
         public NewUser()
         {
             InitializeComponent();
-            List<Caliber> listOfCalibers;
-            using (var db = new srsDBEntities())
-            {
-                listOfCalibers = db.Caliber.ToList();
-            }
-            lstCalibreListBox.ItemsSource = listOfCalibers;
+            //List<Caliber> listOfCalibers;
+            //using (var db = new srsDBEntities())
+            //{
+            //    listOfCalibers = db.Caliber.ToList();
+            //}
+            //lstCalibreListBox.ItemsSource = listOfCalibers;
         }
 
 
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new srsDBEntities())
-            {
-                User newUser = new User()
-                {
-                    FirstName = firstNameBox.Text,
-                    LastName = lastNameBox.Text,
-                };
+        //    using (var db = new srsDBEntities())
+        //    {
+        //        User newUser = new User()
+        //        {
+        //            FirstName = firstNameBox.Text,
+        //            LastName = lastNameBox.Text,
+        //        };
 
-                foreach (Caliber caliber in lstCalibreListBox.SelectedItems)
-                {
-                    newUser.Caliber.Add(db.Caliber.Where(o => o.Name == caliber.Name).FirstOrDefault());
-                }
+        //        foreach (Caliber caliber in lstCalibreListBox.SelectedItems)
+        //        {
+        //            newUser.Caliber.Add(db.Caliber.Where(o => o.Name == caliber.Name).FirstOrDefault());
+        //        }
 
-                db.User.Add(newUser);
-                db.SaveChanges();
-            }
+        //        db.User.Add(newUser);
+        //        db.SaveChanges();
+        //    }
 
-            firstNameBox.Clear();
-            lastNameBox.Clear();
+        //    firstNameBox.Clear();
+        //    lastNameBox.Clear();
 
-            MessageBox.Show("Brugeren er blevet tilføjet!");
+        //    MessageBox.Show("Brugeren er blevet tilføjet!");
         }
     }
 }

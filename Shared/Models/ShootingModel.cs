@@ -1,17 +1,14 @@
-﻿using ShootingRegistrationSystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Client.Models
+namespace Shared.Models
 {
-    class Shooting
+    public class ShootingModel
     {
-        public Shooting()
+        public ShootingModel()
         {
-            this.User = new HashSet<User>();
+            this.User = new HashSet<UserModel>();
         }
 
         public int Id { get; set; }
@@ -21,12 +18,16 @@ namespace Client.Models
         public int PaymentType { get; set; }
         public int Caliber { get; set; }
 
-        public virtual Caliber Caliber1 { get; set; }
-        public virtual PaymentTypes PaymentTypes { get; set; }
-        public virtual ShootingTypes ShootingTypes { get; set; }
-        public virtual ICollection<User> User { get; set; }
+        public virtual CaliberModel Caliber1 { get; set; }
+        public virtual PaymentTypesModel PaymentTypes { get; set; }
+        public virtual ShootingTypesModel ShootingTypes { get; set; }
+        public virtual ICollection<UserModel> User { get; set; }
 
-        
+        public override string ToString()
+        {
+            var user = User.FirstOrDefault();
+            return user.FirstName + " " + user.LastName + " " + ShootingTypes.Name + " " + Caliber1;
+        }
         //public override string ToString()
         //{
         //    User user = new User();
@@ -42,6 +43,6 @@ namespace Client.Models
         //    }
         //    return "Navn: " + user.FirstName + "  " + user.LastName + " Skydning: " + shootingType.Name + " Startet: " + CreationDate;
         //}
-        
+
     }
 }

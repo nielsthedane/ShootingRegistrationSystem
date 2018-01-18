@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Models
+namespace Shared.Models
 {
-    class ShootingTypes
+    public class ShootingTypesModel
     {
       
-        public ShootingTypes()
+        public ShootingTypesModel()
         {
-            this.Shooting = new HashSet<Shooting>();
+            //this.Shooting = new HashSet<ShootingModel>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
 
-        public virtual ICollection<Shooting> Shooting { get; set; }
+        //public virtual ICollection<ShootingModel> Shooting { get; set; }
 
         public override string ToString()
         {

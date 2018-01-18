@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShootingRegistrationSystem", "ShootingRegistrationSystem\ShootingRegistrationSystem.csproj", "{654361C3-D80F-4B65-BCA6-71D558AFC6F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "ShootingRegistrationSystem\DAL.csproj", "{654361C3-D80F-4B65-BCA6-71D558AFC6F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{3A016B8B-9BF2-4935-83DD-077450861013}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{35FF6633-28A3-43CE-92AF-4DF60AE54D90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3A016B8B-9BF2-4935-83DD-077450861013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A016B8B-9BF2-4935-83DD-077450861013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A016B8B-9BF2-4935-83DD-077450861013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35FF6633-28A3-43CE-92AF-4DF60AE54D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35FF6633-28A3-43CE-92AF-4DF60AE54D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35FF6633-28A3-43CE-92AF-4DF60AE54D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35FF6633-28A3-43CE-92AF-4DF60AE54D90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

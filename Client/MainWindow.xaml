@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="700
-        ">
+        Title="MainWindow" Height="622" Width="1237">
     <Grid>
         <ComboBox x:Name="cboPaymentType" HorizontalAlignment="Left" Margin="19,184,0,0" VerticalAlignment="Top" Width="150"/>
         <ComboBox x:Name="cboShootingType" HorizontalAlignment="Left" Margin="19,120,0,0" VerticalAlignment="Top" Width="150"/>
@@ -34,5 +33,6 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        <DataGrid HorizontalAlignment="Left" Height="303" Margin="718,56,0,0" VerticalAlignment="Top" Width="408"/>
     </Grid>
 </Window>
