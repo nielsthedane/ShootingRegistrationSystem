@@ -28,6 +28,27 @@ namespace DAL
             }
         }
 
+        public void changeShootsOnShooting(int shoots, int shootingId)
+        {
+            using (var db = new srsDBEntities())
+            {
+                Shooting shooting = db.Shooting.Where(i => i.Id == shootingId).First();
+                shooting.Shoots = shoots;
+                db.SaveChanges();
+
+            }
+        }
+
+        public void startShooting(ShootingModel shootingModel)
+        {
+            using (var db = new srsDBEntities())
+            {
+                Shooting shooting = db.Shooting.Where(i => i.Id == shootingModel.Id).FirstOrDefault();
+                shooting.isDone = true;
+                db.SaveChanges();
+            }
+        }
+
         public IEnumerable<ShootingModel> GetAllShootings()
         {
             using (var db = new srsDBEntities())

@@ -20,7 +20,7 @@ namespace Client
                 cfg.CreateMap<PaymentTypes, PaymentTypesModel>().ReverseMap().PreserveReferences();
                 cfg.CreateMap<ShootingTypes, ShootingTypesModel>().ReverseMap().PreserveReferences();
             });
-            AutoMapper.Mapper.Configuration.AssertConfigurationIsValid();
+            //AutoMapper.Mapper.Configuration.AssertConfigurationIsValid();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Shared.Models
         public System.DateTime CreationDate { get; set; }
         public int PaymentType { get; set; }
         public int Caliber { get; set; }
+        public bool isDone { get; set; }
 
         public virtual CaliberModel Caliber1 { get; set; }
         public virtual PaymentTypesModel PaymentTypes { get; set; }
@@ -26,7 +27,7 @@ namespace Shared.Models
         public override string ToString()
         {
             var user = User.FirstOrDefault();
-            return user.FirstName + " " + user.LastName + " " + ShootingTypes.Name + " " + Caliber1;
+            return user.FirstName + " " + user.LastName;
         }
         //public override string ToString()
         //{

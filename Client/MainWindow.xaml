@@ -23,7 +23,6 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListBox x:Name="lstShootings" HorizontalAlignment="Left" Height="303" Margin="195,56,0,0" VerticalAlignment="Top" Width="487" Background="#FFF1F1F1" SelectionChanged="lstShootings_SelectionChanged"/>
         <Label Content="Igangværende skydninger:" HorizontalAlignment="Left" Margin="195,30,0,0" VerticalAlignment="Top"/>
         <Button Content="Opret bruger" HorizontalAlignment="Left" Margin="29,5,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click" Height="25">
             <Button.Background>
@@ -33,6 +32,23 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <DataGrid HorizontalAlignment="Left" Height="303" Margin="718,56,0,0" VerticalAlignment="Top" Width="408"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="446" Margin="195,61,0,0" VerticalAlignment="Top" Width="958" FrozenColumnCount="1" BorderBrush="#897C0000" Background="White" Foreground="#DD000000" FontWeight="Bold" FontFamily="Segoe UI Black" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Navn" Binding="{Binding }" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tidspunkt" Binding="{Binding CreationDate,StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Caliber" Binding="{Binding Caliber1}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Betalingstype" Binding="{Binding PaymentTypes}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Skud" Binding="{Binding Shoots}" IsReadOnly="false"/>
+                <DataGridTextColumn Header="Skydning begyndt" Binding="{Binding isDone}" IsReadOnly="true"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Start skydning" Click="startShootingButton">
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

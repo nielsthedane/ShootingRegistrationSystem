@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using AutoMapper;
 using Shared.Models;
 using DAL;
@@ -23,6 +25,35 @@ namespace Client
             this.dbManager = new DbManager();
             InitializeComponent();
             populateLists();
+            dataGrid.CellEditEnding += dataGrid_CellEditEnding;
+        }
+
+        private void startShootingButton(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var shooting = (ShootingModel) dataGrid.SelectedItem;
+            dbManager.startShooting(shooting);
+            populateLists();
+        }
+
+        private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var column = e.Column as DataGridBoundColumn;
+                if (column != null)
+                {
+                    var bindingPath = (column.Binding as Binding).Path.Path;
+                    if (bindingPath == "Shoots")
+                    {
+                        int rowIndex = e.Row.GetIndex();
+                        var el = e.EditingElement as TextBox;
+                        var shooting = (ShootingModel) dataGrid.SelectedItem;
+                        int shootingid = shooting.Id;
+                        int numberofShoots = Int32.Parse(el.Text);
+                        dbManager.changeShootsOnShooting(numberofShoots,shootingid);
+                    }
+                }
+            }
         }
 
         private void populateLists()
@@ -55,7 +86,7 @@ namespace Client
             if (dbManager.GetAllShootings() != null)
             {
                 var shootings = dbManager.GetAllShootings();
-                lstShootings.ItemsSource = shootings;
+                dataGrid.ItemsSource = dbManager.GetAllShootings();
             }
         }
 

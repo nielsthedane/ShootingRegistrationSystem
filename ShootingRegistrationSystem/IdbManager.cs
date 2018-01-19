@@ -7,7 +7,8 @@ namespace DAL
     {
         void addNewShooting(UserModel user, ShootingTypesModel shootingType, PaymentTypesModel paymentType,
             CaliberModel caliber);
-
+        void changeShootsOnShooting(int shoots, int shootingId);
+        void startShooting(ShootingModel shootingModel);
         IEnumerable<ShootingModel> GetAllShootings();
         IEnumerable<UserModel> GetAllUsers();
         IEnumerable<ShootingTypesModel> GetAllShootingTypes();

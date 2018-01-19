@@ -23,6 +23,16 @@ namespace DAL
             dbRepository.addNewShooting(user,shootingType,paymentType,caliber);
         }
 
+        public void changeShootsOnShooting(int shoots, int shootingId)
+        {
+            dbRepository.changeShootsOnShooting(shoots, shootingId);
+        }
+
+        public void startShooting(ShootingModel shootingModel)
+        {
+            dbRepository.startShooting(shootingModel);
+        }
+
         public IEnumerable<ShootingModel> GetAllShootings()
         {
             return dbRepository.GetAllShootings();
