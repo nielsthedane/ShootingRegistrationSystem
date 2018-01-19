@@ -131,13 +131,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{cc1ec21c-1343-426c-b7e0-8ad7aea53dd0}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{35ff6633-28a3-43ce-92af-4df60ae54d90}</Project>
       <Name>Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ShootingRegistrationSystem\DAL.csproj">
-      <Project>{654361c3-d80f-4b65-bca6-71d558afc6f9}</Project>
-      <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

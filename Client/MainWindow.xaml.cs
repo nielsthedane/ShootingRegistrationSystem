@@ -6,8 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using AutoMapper;
+using Business;
 using Shared.Models;
-using DAL;
 
 
 namespace Client

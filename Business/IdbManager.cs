@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Shared.Models;
 
-namespace DAL
+namespace Business
 {
     public interface IdbManager
     {

@@ -1,7 +1,5 @@
 ﻿using System.Windows;
-using DAL;
-using Shared.Models;
-using Unity;
+using Business;
 
 namespace Client
 {
@@ -12,15 +10,7 @@ namespace Client
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<User, UserModel>().ReverseMap().PreserveReferences();
-                cfg.CreateMap<Shooting, ShootingModel>().ReverseMap().PreserveReferences();
-                cfg.CreateMap<Caliber, CaliberModel>().ReverseMap().PreserveReferences();
-                cfg.CreateMap<PaymentTypes, PaymentTypesModel>().ReverseMap().PreserveReferences();
-                cfg.CreateMap<ShootingTypes, ShootingTypesModel>().ReverseMap().PreserveReferences();
-            });
-            //AutoMapper.Mapper.Configuration.AssertConfigurationIsValid();
+            DbManager.startAutoMapper();
         }
     }
 }

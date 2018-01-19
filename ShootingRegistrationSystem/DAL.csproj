@@ -121,7 +121,6 @@
       <DependentUpon>SrsdbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DALServiceCollectionExtension.cs" />
-    <Compile Include="IdbManager.cs" />
     <Compile Include="IdbRepository.cs" />
     <Compile Include="Mapper\ModelsMapperConfiguration.cs" />
     <Compile Include="PaymentTypes.cs">
@@ -157,7 +156,6 @@
     <Compile Include="User.cs">
       <DependentUpon>SrsdbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbManager.cs" />
     <Compile Include="DbRepository.cs" />
   </ItemGroup>
   <ItemGroup>

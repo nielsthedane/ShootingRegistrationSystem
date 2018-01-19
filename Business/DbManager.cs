@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity.Infrastructure.DependencyResolution;
-using System.Linq;
 using Shared.Models;
 using DAL;
-using DAL.Mapper;
 
-namespace DAL
+namespace Business
 {
     public class DbManager : IdbManager
     {
+
+        public static void startAutoMapper()
+        {
+            DbRepository.startAutoMapper();
+        }
 
         private static IdbRepository dbRepository;
 

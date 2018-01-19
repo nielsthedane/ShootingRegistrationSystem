@@ -9,6 +9,19 @@ namespace DAL
 {
     public class DbRepository : IdbRepository
     {
+        public static void startAutoMapper()
+        {
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<User, UserModel>().ReverseMap().PreserveReferences();
+                cfg.CreateMap<Shooting, ShootingModel>().ReverseMap().PreserveReferences();
+                cfg.CreateMap<Caliber, CaliberModel>().ReverseMap().PreserveReferences();
+                cfg.CreateMap<PaymentTypes, PaymentTypesModel>().ReverseMap().PreserveReferences();
+                cfg.CreateMap<ShootingTypes, ShootingTypesModel>().ReverseMap().PreserveReferences();
+            });
+            AutoMapper.Mapper.Configuration.AssertConfigurationIsValid();
+        }
+
         public void addNewShooting(UserModel user, ShootingTypesModel shootingType, PaymentTypesModel paymentType,
             CaliberModel caliber)
         {
