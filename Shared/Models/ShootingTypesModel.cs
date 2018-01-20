@@ -22,7 +22,7 @@ namespace Shared.Models
 
         public override string ToString()
         {
-            return Name + " Pris: " + Price;
+            return Name;
         }
     }
 }

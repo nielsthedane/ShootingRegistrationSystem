@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using AutoMapper;
+using System.Windows.Forms;
+using System.Windows.Threading;
 using Business;
 using Shared.Models;
+using Binding = System.Windows.Data.Binding;
+using Button = System.Windows.Controls.Button;
+using MessageBox = System.Windows.MessageBox;
+using TextBox = System.Windows.Controls.TextBox;
 
 
 namespace Client
@@ -25,16 +26,38 @@ namespace Client
             this.dbManager = new DbManager();
             InitializeComponent();
             populateLists();
-            dataGrid.CellEditEnding += dataGrid_CellEditEnding;
+            setupDataGrid();
         }
 
+        private void setupDataGrid()
+        {
+            dataGrid.CanUserAddRows = false;
+            dataGrid.CellEditEnding += dataGrid_CellEditEnding;
+            cboUser.SelectionChanged += cboUser_SelectionIndexChanged;
+            Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() => dataGrid_DataBindingComplete(null, null)));
+        }
         private void startShootingButton(object sender, RoutedEventArgs routedEventArgs)
         {
             var shooting = (ShootingModel) dataGrid.SelectedItem;
-            dbManager.startShooting(shooting);
+            dbManager.startStopShooting(shooting);
             populateLists();
         }
 
+        private void sortDatagrid()
+        {
+            foreach (ShootingModel sModel in dataGrid.ItemsSource)
+            {
+                DataGridTemplateColumn buttonColumn = new DataGridTemplateColumn();
+                DataTemplate buttonTemplate = new DataTemplate();
+                FrameworkElementFactory buttonFactory = new FrameworkElementFactory(typeof (Button));
+                buttonTemplate.VisualTree = buttonFactory;
+            }
+        }
+
+        private void dataGrid_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            //sortDatagrid();
+        }
         private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
@@ -59,10 +82,10 @@ namespace Client
         private void populateLists()
         {
             cboUser.ItemsSource = dbManager.GetAllUsers();
-            cboCaliber.ItemsSource = dbManager.GetAllCaliberTypes();
             cboPaymentType.ItemsSource = dbManager.GetAllPaymentTypes();
             cboShootingType.ItemsSource = dbManager.GetAllShootingTypes();
             populateShootingListBox();
+            
         }
 
         public MainWindow(DbManager dbManager)
@@ -76,9 +99,10 @@ namespace Client
             populateShootingListBox();
         }
 
-        private void lstShootings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cboUser_SelectionIndexChanged(object sender, System.EventArgs e)
         {
-
+            UserModel selectedUser = (UserModel)cboUser.SelectedItem;
+            cboCaliber.ItemsSource = selectedUser.Caliber;
         }
 
         private void populateShootingListBox()
@@ -89,17 +113,6 @@ namespace Client
                 dataGrid.ItemsSource = dbManager.GetAllShootings();
             }
         }
-
-        //}
-
-            //private IEnumerable<Shooting> getAllShootings()
-            //{
-            //    using (var db = new srsDBEntities())
-            //    {
-            //        return db.Shooting.ToList();
-            //    }
-
-            //}
 
             private void Button_Click(object sender, RoutedEventArgs e)
         {

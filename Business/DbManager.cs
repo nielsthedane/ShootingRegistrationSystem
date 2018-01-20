@@ -30,9 +30,19 @@ namespace Business
             dbRepository.changeShootsOnShooting(shoots, shootingId);
         }
 
-        public void startShooting(ShootingModel shootingModel)
+        public void startStopShooting(ShootingModel shootingModel)
         {
-            dbRepository.startShooting(shootingModel);
+            dbRepository.startStopShooting(shootingModel);
+        }
+
+        public void addNewUser(UserModel userModel)
+        {
+            dbRepository.addNewUser(userModel);
+        }
+
+        public IEnumerable<CaliberModel> getAllCalibers()
+        {
+            return dbRepository.getAllCalibers();
         }
 
         public IEnumerable<ShootingModel> GetAllShootings()

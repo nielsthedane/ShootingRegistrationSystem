@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Business;
+using Shared.Models;
 
 namespace Client
 {
@@ -20,41 +23,44 @@ namespace Client
     /// </summary>
     public partial class NewUser : Window
     {
+        private readonly IdbManager dbManager;
         public NewUser()
         {
+            dbManager = new DbManager();
             InitializeComponent();
-            //List<Caliber> listOfCalibers;
-            //using (var db = new srsDBEntities())
-            //{
-            //    listOfCalibers = db.Caliber.ToList();
-            //}
-            //lstCalibreListBox.ItemsSource = listOfCalibers;
+            lstCalibreListBox.ItemsSource = dbManager.getAllCalibers();
         }
 
 
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-        //    using (var db = new srsDBEntities())
-        //    {
-        //        User newUser = new User()
-        //        {
-        //            FirstName = firstNameBox.Text,
-        //            LastName = lastNameBox.Text,
-        //        };
+            if (firstNameBox.Text.Length != 0 && lastNameBox.Text.Length != 0 &&
+                lstCalibreListBox.SelectedItems.Count != 0)
+            {
+                ICollection<CaliberModel> calibers = new List<CaliberModel>();
+                foreach (CaliberModel caliber in lstCalibreListBox.SelectedItems)
+                {
+                    calibers.Add(caliber);
+                }
+                var userModel = new UserModel()
+                {
+                    FirstName = firstNameBox.Text,
+                    LastName = lastNameBox.Text,
+                    Caliber = calibers
+                };
+                dbManager.addNewUser(userModel);
 
-        //        foreach (Caliber caliber in lstCalibreListBox.SelectedItems)
-        //        {
-        //            newUser.Caliber.Add(db.Caliber.Where(o => o.Name == caliber.Name).FirstOrDefault());
-        //        }
+                firstNameBox.Clear();
+                lastNameBox.Clear();
+                lstCalibreListBox.SelectedItems.Clear();
 
-        //        db.User.Add(newUser);
-        //        db.SaveChanges();
-        //    }
+                MessageBox.Show("Brugeren er blevet tilføjet!");
+            }
+            else
+            {
+                MessageBox.Show("Du har enten glemt Fornavn, Efternavn, eller kalibre");
+            }
 
-        //    firstNameBox.Clear();
-        //    lastNameBox.Clear();
-
-        //    MessageBox.Show("Brugeren er blevet tilføjet!");
         }
     }
 }

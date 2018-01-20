@@ -5,50 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="622" Width="1237">
-    <Grid>
-        <ComboBox x:Name="cboPaymentType" HorizontalAlignment="Left" Margin="19,184,0,0" VerticalAlignment="Top" Width="150"/>
-        <ComboBox x:Name="cboShootingType" HorizontalAlignment="Left" Margin="19,120,0,0" VerticalAlignment="Top" Width="150"/>
-        <ComboBox x:Name="cboUser" HorizontalAlignment="Left" Margin="19,56,0,0" VerticalAlignment="Top" Width="150"/>
-        <ComboBox x:Name="cboCaliber" HorizontalAlignment="Left" Margin="19,248,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label Content="Bruger:" HorizontalAlignment="Left" Margin="36,30,0,0" VerticalAlignment="Top"/>
-        <Label Content="Skydning:" HorizontalAlignment="Left" Margin="36,89,0,0" VerticalAlignment="Top"/>
-        <Label Content="Betalings type:" HorizontalAlignment="Left" Margin="29,153,0,0" VerticalAlignment="Top"/>
-        <Label Content="Kaliber" HorizontalAlignment="Left" Margin="36,217,0,0" VerticalAlignment="Top"/>
-        <Button Content="Opret skydning" HorizontalAlignment="Left" Margin="29,288,0,0" VerticalAlignment="Top" Width="136" Click="addShootingButton_click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF9E9E9E" Offset="0.003"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Label Content="Igangværende skydninger:" HorizontalAlignment="Left" Margin="195,30,0,0" VerticalAlignment="Top"/>
-        <Button Content="Opret bruger" HorizontalAlignment="Left" Margin="29,5,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click" Height="25">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFCFCFCF" Offset="0.007"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="446" Margin="195,61,0,0" VerticalAlignment="Top" Width="958" FrozenColumnCount="1" BorderBrush="#897C0000" Background="White" Foreground="#DD000000" FontWeight="Bold" FontFamily="Segoe UI Black" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Navn" Binding="{Binding }" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Tidspunkt" Binding="{Binding CreationDate,StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Caliber" Binding="{Binding Caliber1}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Betalingstype" Binding="{Binding PaymentTypes}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Skud" Binding="{Binding Shoots}" IsReadOnly="false"/>
-                <DataGridTextColumn Header="Skydning begyndt" Binding="{Binding isDone}" IsReadOnly="true"/>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Start skydning" Click="startShootingButton">
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        Title="MainWindow" Height="657" Width="1167.5">
+    <Grid Margin="0,0,2,-1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TabControl HorizontalAlignment="Left" Height="622" VerticalAlignment="Top" Width="1153">
+            <TabItem Header="200m Bane" HorizontalAlignment="Right" Width="79" Margin="0,-2,-23,0">
+                <Grid Background="#FFE5E5E5" Margin="0,-3,0,3">
+                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="594" VerticalAlignment="Top" Width="1147" FrozenColumnCount="1" BorderBrush="#897C0000" Background="White" Foreground="#DD000000" FontWeight="Bold" FontFamily="Segoe UI Black" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Navn" Binding="{Binding ''}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tidspunkt" Binding="{Binding CreationDate, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" SortDirection="Descending" />
+                            <DataGridTextColumn Header="Caliber" Binding="{Binding Caliber1}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Type Skydning" Binding="{Binding ShootingTypes}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Skud" Binding="{Binding Shoots}" IsReadOnly="false"/>
+                            <DataGridTextColumn Header="Skydning begyndt" Binding="{Binding isDone}" IsReadOnly="true"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Start/Stop skydning" Click="startShootingButton" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Indskrivning" Margin="25,-2,-24,0">
+                <Grid Background="White">
+                    <Button Content="Opret skydning" HorizontalAlignment="Left" Margin="61,287,0,0" VerticalAlignment="Top" Width="136" Click="addShootingButton_click">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF9E9E9E" Offset="0.003"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <ComboBox x:Name="cboCaliber" HorizontalAlignment="Left" Margin="54,238,0,0" VerticalAlignment="Top" Width="150"/>
+                    <Label Content="Kaliber" HorizontalAlignment="Left" Margin="71,207,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cboPaymentType" HorizontalAlignment="Left" Margin="44,164,0,0" VerticalAlignment="Top" Width="150"/>
+                    <ComboBox x:Name="cboShootingType" HorizontalAlignment="Left" Margin="54,92,0,0" VerticalAlignment="Top" Width="150"/>
+                    <ComboBox x:Name="cboUser" HorizontalAlignment="Left" Margin="44,36,0,0" VerticalAlignment="Top" Width="150"/>
+                    <Label Content="Bruger:" HorizontalAlignment="Left" Margin="61,10,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Skydning:" HorizontalAlignment="Left" Margin="61,61,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Betalings type:" HorizontalAlignment="Left" Margin="54,125,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Opret ny bruger" HorizontalAlignment="Left" Margin="265,17,0,0" VerticalAlignment="Top" Width="135" Click="Button_Click" Height="25">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFCFCFCF" Offset="0.007"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

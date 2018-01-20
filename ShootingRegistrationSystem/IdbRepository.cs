@@ -9,7 +9,9 @@ namespace DAL
             CaliberModel caliber);
 
         void changeShootsOnShooting(int shoots, int shootingId);
-        void startShooting(ShootingModel shootingModel);
+        void startStopShooting(ShootingModel shootingModel);
+        void addNewUser(UserModel userModel);
+        IEnumerable<CaliberModel> getAllCalibers();
         IEnumerable<ShootingModel> GetAllShootings();
         IEnumerable<UserModel> GetAllUsers();
         IEnumerable<ShootingTypesModel> GetAllShootingTypes();

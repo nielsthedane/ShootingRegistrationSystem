@@ -52,13 +52,49 @@ namespace DAL
             }
         }
 
-        public void startShooting(ShootingModel shootingModel)
+        public void startStopShooting(ShootingModel shootingModel)
         {
             using (var db = new srsDBEntities())
             {
                 Shooting shooting = db.Shooting.Where(i => i.Id == shootingModel.Id).FirstOrDefault();
+                if (shooting.isDone == true)
+                {
+                    shooting.isDone = false;
+                } else { 
                 shooting.isDone = true;
+                }
                 db.SaveChanges();
+            }
+        }
+
+        public void addNewUser(UserModel userModel)
+        {
+            using (var db = new srsDBEntities())
+            {
+                User newUser = new User()
+                {
+                    FirstName = userModel.FirstName,
+                    LastName = userModel.LastName
+                };
+
+                var calibers = AutoMapper.Mapper.Map<IEnumerable<Caliber>>(userModel.Caliber);
+
+                foreach (Caliber caliber in calibers)
+                {
+                    newUser.Caliber.Add(db.Caliber.Where(o => o.Name == caliber.Name).FirstOrDefault());
+                }
+
+                db.User.Add(newUser);
+                db.SaveChanges();
+            }
+        }
+
+        public IEnumerable<CaliberModel> getAllCalibers()
+        {
+            using (var db = new srsDBEntities())
+            {
+                var allCalibers = db.Caliber;
+                return AutoMapper.Mapper.Map<IEnumerable<CaliberModel>>(allCalibers);
             }
         }
 
